@@ -1,5 +1,6 @@
 package br.com.starter.domain.profile;
 
+import br.com.starter.domain.address.Address;
 import br.com.starter.domain.common.Auditable;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -27,6 +28,10 @@ public class Profile extends Auditable {
     private String phone;
     @JsonFormat(pattern = "yyyy-MM-dd")
     private LocalDate birthDate;
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "address_id", referencedColumnName = "id")
+    private Address address;
+
     @Version
     private Long version;
 }

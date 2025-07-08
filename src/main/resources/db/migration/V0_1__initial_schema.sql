@@ -3,20 +3,9 @@
 -- Tabela Address
 CREATE TABLE addresses (
     id UUID PRIMARY KEY NOT NULL,
-    cep VARCHAR(20),
-    street VARCHAR(255),
-    neighborhood VARCHAR(100),
-    number VARCHAR(50),
+    country VARCHAR(20),
     city VARCHAR(100),
-    state VARCHAR(100),
-    complement VARCHAR(255),
-    latitude DECIMAL(9, 6),
-    longitude DECIMAL(9, 6),
-    reference_point VARCHAR(255),
-    created_at TIMESTAMPTZ NOT NULL,
-    updated_at TIMESTAMPTZ,
-    deleted_at TIMESTAMPTZ,
-    version INTEGER NOT NULL DEFAULT 0
+    state VARCHAR(100)
 );
 
 -- Tabela Auth
@@ -111,27 +100,6 @@ CREATE TABLE revinfo (
 );
 
 -- Tabelas de auditoria para entidades auditadas
-CREATE TABLE addresses_AUD (
-    id UUID NOT NULL,
-    rev INTEGER NOT NULL,
-    revtype SMALLINT,
-    cep VARCHAR(20),
-    street VARCHAR(255),
-    neighborhood VARCHAR(100),
-    number VARCHAR(50),
-    city VARCHAR(100),
-    state VARCHAR(100),
-    complement VARCHAR(255),
-    latitude DECIMAL(9, 6),
-    longitude DECIMAL(9, 6),
-    reference_point VARCHAR(255),
-    created_at TIMESTAMPTZ,
-    updated_at TIMESTAMPTZ,
-    deleted_at TIMESTAMPTZ,
-    version INTEGER,
-    PRIMARY KEY (id, rev)
-);
-
 CREATE TABLE auths_AUD (
     id UUID NOT NULL,
     rev INTEGER NOT NULL,
