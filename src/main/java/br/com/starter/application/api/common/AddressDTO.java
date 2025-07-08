@@ -7,10 +7,7 @@ import lombok.Data;
 @Data
 @AllArgsConstructor
 public class AddressDTO {
-    String street;
-    String number;
-    String cep;
-    String province;
+    String country;
     String city;
     String state;
 }
