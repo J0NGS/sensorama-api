@@ -5,6 +5,7 @@ import br.com.starter.domain.common.Auditable;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.envers.Audited;
 
 import java.util.UUID;
 
@@ -12,6 +13,7 @@ import java.util.UUID;
 @Getter
 @Setter
 @Table(name = "badges")
+@Audited
 public class Badge extends Auditable {
     @Id
     private UUID id = UUID.randomUUID();

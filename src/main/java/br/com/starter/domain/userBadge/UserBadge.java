@@ -7,6 +7,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.envers.Audited;
 
 import java.time.LocalDateTime;
 import java.util.UUID;
@@ -15,11 +16,12 @@ import java.util.UUID;
 @Getter
 @Setter
 @Table(name = "user_badges")
+@Audited
 public class UserBadge extends Auditable {
     @Id
     private UUID id = UUID.randomUUID();
     @ManyToOne
-    @JoinColumn(name = "badge_id", referencedColumnName = "id")
+    @JoinColumn(name = "profile_id", referencedColumnName = "id")
     private Profile profile;
     @ManyToOne
     @JoinColumn(name = "badge_id", referencedColumnName = "id")

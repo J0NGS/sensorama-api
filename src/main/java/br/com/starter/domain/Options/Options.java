@@ -1,7 +1,7 @@
 package br.com.starter.domain.Options;
 
 import br.com.starter.domain.common.Auditable;
-import br.com.starter.domain.game.Game;
+import br.com.starter.domain.question.Question;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -18,8 +18,8 @@ public class Options extends Auditable {
     @Id
     private UUID id = UUID.randomUUID();
     @ManyToOne
-    @JoinColumn(name = "game_id", referencedColumnName = "id")
-    private Game game;
+    @JoinColumn(name = "question_id", referencedColumnName = "id")
+    private Question question;
     private String text;
     private String imageUrl;
     private boolean isCorrect;

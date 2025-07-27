@@ -18,7 +18,7 @@ import java.util.UUID;
 @Setter
 @Getter
 @Entity
-@Table
+@Table(name = "rounds")
 public class Round extends Auditable {
     @Id
     private UUID id = UUID.randomUUID();

@@ -24,9 +24,6 @@ public class Game extends Auditable {
     private Status status;
     @OneToMany(mappedBy = "game", cascade = CascadeType.ALL)
     private List<GamePlayer> players;
-    @ManyToOne
-    @JoinColumn(name = "winner_id", referencedColumnName = "id")
-    private Profile winner;
     private LocalDateTime startTime;
     private LocalDateTime endTime;
     @Version
