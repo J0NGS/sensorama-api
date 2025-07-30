@@ -1,9 +1,7 @@
-package br.com.starter.application.useCase.categoryCase;
+package br.com.starter.application.useCase.category;
 
 import br.com.starter.domain.category.Category;
 import br.com.starter.domain.category.CategoryService;
-import br.com.starter.domain.privilege.Privilege;
-import br.com.starter.domain.privilege.PrivilegeService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

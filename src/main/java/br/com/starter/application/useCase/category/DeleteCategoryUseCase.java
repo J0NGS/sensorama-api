@@ -1,7 +1,5 @@
-package br.com.starter.application.useCase.categoryCase;
+package br.com.starter.application.useCase.category;
 
-import br.com.starter.application.api.category.dto.UpdateCategoryDTO;
-import br.com.starter.domain.category.Category;
 import br.com.starter.domain.category.CategoryService;
 import br.com.starter.infrastructure.exceptions.FrontDisplayableException;
 import org.springframework.http.HttpStatus;

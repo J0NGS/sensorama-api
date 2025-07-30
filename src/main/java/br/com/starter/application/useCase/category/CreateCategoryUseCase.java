@@ -1,4 +1,4 @@
-package br.com.starter.application.useCase.categoryCase;
+package br.com.starter.application.useCase.category;
 
 
 import br.com.starter.application.api.category.dto.CategoryRegistrationRequest;

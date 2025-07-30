@@ -3,7 +3,7 @@ package br.com.starter.application.api.category;
 import br.com.starter.application.api.category.dto.CategoryRegistrationRequest;
 import br.com.starter.application.api.category.dto.UpdateCategoryDTO;
 import br.com.starter.application.api.common.ResponseDTO;
-import br.com.starter.application.useCase.categoryCase.*;
+import br.com.starter.application.useCase.category.*;
 import br.com.starter.domain.user.CustomUserDetails;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
