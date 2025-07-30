@@ -9,8 +9,8 @@ import java.util.UUID;
 public class DeleteCategoryUseCase {
     private final CategoryService categoryService;
 
-    public boolean execute(UUID userId) {
-        if (categoryService.deleteCategoryById(userId)) {
+    public boolean execute(UUID categoryId) {
+        if (categoryService.deleteCategoryById(categoryId)) {
             return true;
         }
         throw new FrontDisplayableException(HttpStatus.NOT_MODIFIED, "Não foi possível deletá-lo.");

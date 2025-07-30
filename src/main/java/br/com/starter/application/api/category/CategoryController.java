@@ -65,7 +65,7 @@ public class CategoryController {
 
     //delete
     @DeleteMapping("/{categoryId}")
-    public ResponseEntity<?> deleteCattegpry(@AuthenticationPrincipal CustomUserDetails userAuthentication,
+    public ResponseEntity<?> delete(@AuthenticationPrincipal CustomUserDetails userAuthentication,
                                              @PathVariable UUID categoryId) {
         ResponseDTO<?> response = new ResponseDTO<>(deleteCategoryUseCase.execute(categoryId));
         return ResponseEntity.ok(response);
