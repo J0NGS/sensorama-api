@@ -1,6 +1,9 @@
 package br.com.starter.domain.category;
 
+import br.com.starter.domain.privilege.Privilege;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
@@ -32,8 +35,11 @@ public class CategoryService {
     public List<Category> findCategoriesByNameContainingIgnoreCase(String name) {
         return categoryRepository.findByNameContainingIgnoreCase(name);
     }
-    public List<Category> findAllCategories() {
-        return categoryRepository.findAll();
+
+    public Page<Category> getAllCategorys(Pageable pageable) {
+        Page<Category> categorys =  categoryRepository.findAll(pageable);
+        return categorys;
+
     }
 
     public void deleteCategoryById(UUID id) {
