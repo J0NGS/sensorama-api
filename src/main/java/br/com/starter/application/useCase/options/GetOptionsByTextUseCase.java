@@ -1,19 +1,18 @@
 package br.com.starter.application.useCase.options;
 
-import br.com.starter.domain.Options.Options;
+import br.com.starter.domain.option.Option;
+import br.com.starter.domain.option.OptionService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
-import java.util.UUID;
 
 @RequiredArgsConstructor
 @Component
-public class GetOptionContainTextUseCase {
+public class GetOptionsByTextUseCase {
     private final OptionService optionService;
 
-    public List<Options> execute(String text) {
-        return gameService.findByTextContaining(text);
+    public List<Option> execute(String text) {
+        return optionService.findByTextContainingIgnoreCase(text);
     }
-
 }

@@ -35,7 +35,7 @@ public class UserBadgeController {
     }
 
     //findBy badgeId
-    @GetMapping("/{badgeId}")
+    @GetMapping("/badge/{badgeId}")
     public ResponseEntity<?> findByBadgeId(@AuthenticationPrincipal CustomUserDetails userAuthentication,
                                       @PathVariable("badgeId") UUID badgeId) {
         ResponseDTO<?> response = new ResponseDTO<>(getUserBadgebyBadgeIdUseCase.execute(badgeId));
@@ -44,19 +44,19 @@ public class UserBadgeController {
 
 
     //findBy profileId
-    @GetMapping("/{profileId}")
+    @GetMapping("/profile/{profileId}")
     public ResponseEntity<?> findByProfileId(@AuthenticationPrincipal CustomUserDetails userAuthentication,
                                            @PathVariable("profileId") UUID profileId) {
         ResponseDTO<?> response = new ResponseDTO<>(getUserBadgeByProfileIdUseCase.execute(profileId));
         return ResponseEntity.ok(response);
     }
 
-    //findBy profileId adn badgeId
-    @GetMapping("/{profileId}/{badgeId}")
-    public ResponseEntity<?> findByProfileIdAndbadgeId(@AuthenticationPrincipal CustomUserDetails userAuthentication,
+    //findBy profileId and badgeId
+    @GetMapping("/profile/{profileId}/badge/{badgeId}")
+    public ResponseEntity<?> findByProfileIdAndBadgeId(@AuthenticationPrincipal CustomUserDetails userAuthentication,
                                              @PathVariable("profileId") UUID profileId,
-                                             @PathVariable("profileId") UUID badgeId) {
-        ResponseDTO<?> response = new ResponseDTO<>(getUserBadgeByProfileIdAndBadgeIdUseCase.execute(profileId,badgeId));
+                                             @PathVariable("badgeId") UUID badgeId) {
+        ResponseDTO<?> response = new ResponseDTO<>(getUserBadgeByProfileIdAndBadgeIdUseCase.execute(profileId, badgeId));
         return ResponseEntity.ok(response);
     }
 }

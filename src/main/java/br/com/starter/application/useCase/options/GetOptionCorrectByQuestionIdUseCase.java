@@ -1,6 +1,7 @@
 package br.com.starter.application.useCase.options;
 
-import br.com.starter.domain.Options.Options;
+import br.com.starter.domain.option.Option;
+import br.com.starter.domain.option.OptionService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -12,8 +13,8 @@ import java.util.UUID;
 public class GetOptionCorrectByQuestionIdUseCase {
     private final OptionService optionService;
 
-    public List<Options> execute(UUID questionId) {
-        return gameService.findCorrectOptionsByQuestionId(questionId);
+    public Option execute(UUID questionId) {
+        return optionService.findCorrectOptionsByQuestionId(questionId);
     }
 
 }

@@ -62,13 +62,15 @@ CREATE TABLE users (
     auth_id UUID,
     profile_id UUID,
     role_id UUID,
+    address_id UUID,
     created_at TIMESTAMPTZ NOT NULL,
     updated_at TIMESTAMPTZ,
     deleted_at TIMESTAMPTZ,
     version INTEGER NOT NULL DEFAULT 0,
     CONSTRAINT fk_auth FOREIGN KEY (auth_id) REFERENCES auths(id) ON DELETE CASCADE,
     CONSTRAINT fk_profile FOREIGN KEY (profile_id) REFERENCES profiles(id) ON DELETE SET NULL,
-    CONSTRAINT fk_role FOREIGN KEY (role_id) REFERENCES roles(id) ON DELETE SET NULL
+    CONSTRAINT fk_role FOREIGN KEY (role_id) REFERENCES roles(id) ON DELETE SET NULL,
+    CONSTRAINT fk_user_address FOREIGN KEY (address_id) REFERENCES addresses(id) ON DELETE SET NULL
 );
 
 -- Tabela de relacionamento entre Role e Privilege
@@ -301,6 +303,7 @@ CREATE TABLE users_AUD (
     auth_id UUID,
     profile_id UUID,
     role_id UUID,
+    address_id UUID,
     created_at TIMESTAMPTZ,
     updated_at TIMESTAMPTZ,
     deleted_at TIMESTAMPTZ,

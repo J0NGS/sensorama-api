@@ -2,6 +2,7 @@ package br.com.starter.application.useCase.round;
 
 import br.com.starter.domain.question.Question;
 import br.com.starter.domain.round.Round;
+import br.com.starter.domain.round.RoundService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 

@@ -5,15 +5,15 @@ import br.com.starter.domain.option.OptionService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
 import java.util.UUID;
 
 @RequiredArgsConstructor
 @Component
-public class GetOptionByIdUseCase {
+public class GetOptionsByQuestionIdUseCase {
     private final OptionService optionService;
 
-    public Option execute(UUID optionId) {
-        return optionService.findById(optionId);
+    public List<Option> execute(UUID questionId) {
+        return optionService.findByQuestionId(questionId);
     }
-
 }

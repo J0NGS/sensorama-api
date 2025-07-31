@@ -9,11 +9,10 @@ import java.util.UUID;
 
 @RequiredArgsConstructor
 @Component
-public class GetOptionByIdUseCase {
+public class GetOptionsByIdUseCase {
     private final OptionService optionService;
 
     public Option execute(UUID optionId) {
         return optionService.findById(optionId);
     }
-
 }

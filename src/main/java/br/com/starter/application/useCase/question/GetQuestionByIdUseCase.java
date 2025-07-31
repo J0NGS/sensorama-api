@@ -2,6 +2,7 @@ package br.com.starter.application.useCase.question;
 
 import br.com.starter.domain.question.Question;
 import lombok.RequiredArgsConstructor;
+import br.com.starter.domain.question.QuestionService;
 import org.springframework.stereotype.Component;
 
 import java.util.UUID;

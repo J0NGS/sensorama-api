@@ -18,19 +18,9 @@ import java.util.UUID;
 @RequestMapping("/sensorama/api/round")
 @RequiredArgsConstructor
 public class RoundController {
-    private final GetAllRoundUseCase getAllRoundUseCase;
     private final GetRoundByIdUseCase getRoundByIdUseCase;
-    private final GetRoundByQuestionIdUseCase getRoundByQuestionIdUseCase;
     private final GetRoundByGameIdUseCase getRoundByGameIdUseCase;
-    private final GetRoundByPlayerIdUseCase getRoundByPlayerIdUseCase;
     private final GetRoundByGameIdAndPlayerIdUseCase getRoundByGameIdAndPlayerIdUseCase;
-
-    //index
-    @GetMapping
-    public ResponseEntity<?> getAll(Pageable pageable) {
-        ResponseDTO<?> response = new ResponseDTO<>(getAllRoundUseCase.execute(pageable));
-        return ResponseEntity.ok(response);
-    }
 
     //findBy
     @GetMapping("/{roundId}")
@@ -40,27 +30,11 @@ public class RoundController {
         return ResponseEntity.ok(response);
     }
 
-    //findBy questionId
-    @GetMapping("/{questionId}")
-    public ResponseEntity<?> findByQuestionId(@AuthenticationPrincipal CustomUserDetails userAuthentication,
-                                              @PathVariable("questionId") UUID questionId) {
-        ResponseDTO<?> response = new ResponseDTO<>(getRoundByQuestionIdUseCase.execute(questionId));
-        return ResponseEntity.ok(response);
-    }
-
     //findBy gameId
     @GetMapping("/{gameId}")
     public ResponseEntity<?> findByGameId(@AuthenticationPrincipal CustomUserDetails userAuthentication,
                                               @PathVariable("gameId") UUID gameId) {
         ResponseDTO<?> response = new ResponseDTO<>(getRoundByGameIdUseCase.execute(gameId));
-        return ResponseEntity.ok(response);
-    }
-
-    //findBy playerId
-    @GetMapping("/{playerId}")
-    public ResponseEntity<?> findByPlayerId(@AuthenticationPrincipal CustomUserDetails userAuthentication,
-                                          @PathVariable("playerId") UUID playerId) {
-        ResponseDTO<?> response = new ResponseDTO<>(getRoundByPlayerIdUseCase.execute(playerId));
         return ResponseEntity.ok(response);
     }
 

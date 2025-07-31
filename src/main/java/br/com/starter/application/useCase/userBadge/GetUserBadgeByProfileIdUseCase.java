@@ -1,6 +1,7 @@
 package br.com.starter.application.useCase.userBadge;
 
 import br.com.starter.domain.userBadge.UserBadge;
+import br.com.starter.domain.userBadge.UserBadgeService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 

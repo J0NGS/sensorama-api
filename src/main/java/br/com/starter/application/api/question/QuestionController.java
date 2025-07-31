@@ -2,6 +2,7 @@ package br.com.starter.application.api.question;
 
 
 import br.com.starter.application.api.common.ResponseDTO;
+import br.com.starter.application.api.question.dto.CreateQuestionDTO;
 import br.com.starter.application.useCase.question.*;
 import br.com.starter.domain.user.CustomUserDetails;
 import lombok.RequiredArgsConstructor;
@@ -19,18 +20,23 @@ import java.util.UUID;
 public class QuestionController {
     private final GetQuestionByCategoryIdUseCase getByCategoryIdUseCase;
     private final GetAllQuestionUseCase getAllQuestionUseCase;
-    private final GetQuestionByMediaType getByMediaTypeUseCase;
     private final GetQuestionByTitleUseCase getQuestionByTitleUseCase;
     private final GetQuestionByIdUseCase getQuestionByIdUseCase;
+    private final CreateQuestionUseCase createQuestionUseCase;
 
-    //index
+    @PostMapping
+    public ResponseEntity<?> createQuestion(@AuthenticationPrincipal CustomUserDetails userAuthentication,
+                                          @RequestBody CreateQuestionDTO createQuestionDTO) {
+        ResponseDTO<?> response = new ResponseDTO<>(createQuestionUseCase.execute(createQuestionDTO));
+        return ResponseEntity.ok(response);
+    }
+
     @GetMapping
     public ResponseEntity<?> getAll(Pageable pageable) {
         ResponseDTO<?> response = new ResponseDTO<>(getAllQuestionUseCase.execute(pageable));
         return ResponseEntity.ok(response);
     }
 
-    //findBy
     @GetMapping("/{questionId}")
     public ResponseEntity<?> findCategoryById(@AuthenticationPrincipal CustomUserDetails userAuthentication,
                                               @PathVariable("questionId") UUID questionId) {
@@ -38,15 +44,6 @@ public class QuestionController {
         return ResponseEntity.ok(response);
     }
 
-    //find by media
-    @GetMapping("/Media")
-    public ResponseEntity<?> findQuestionById(@AuthenticationPrincipal CustomUserDetails userAuthentication,
-                                              @RequestBody MediaType media) {
-        ResponseDTO<?> response = new ResponseDTO<>(getByMediaTypeUseCase.execute(media));
-        return ResponseEntity.ok(response);
-    }
-
-    //find by CategoryId
     @GetMapping("/Category/{categoryId}")
     public ResponseEntity<?> findQuestionByCategoryId(@AuthenticationPrincipal CustomUserDetails userAuthentication,
                                               @PathVariable("categoryId") UUID categoryId) {
@@ -54,7 +51,6 @@ public class QuestionController {
         return ResponseEntity.ok(response);
     }
 
-    //find By title
     @GetMapping("/Title")
     public ResponseEntity<?> findQuestionByTitle(@AuthenticationPrincipal CustomUserDetails userAuthentication,
                                               @RequestBody String title) {
