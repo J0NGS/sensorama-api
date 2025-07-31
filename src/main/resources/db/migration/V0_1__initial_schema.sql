@@ -106,11 +106,13 @@ CREATE TABLE badges (
     id UUID PRIMARY KEY NOT NULL,
     name VARCHAR(255) NOT NULL,
     description TEXT,
-    icon TEXT,
+    image_url TEXT,
+    category_id UUID,
     created_at TIMESTAMPTZ NOT NULL,
     updated_at TIMESTAMPTZ,
     deleted_at TIMESTAMPTZ,
-    version INTEGER NOT NULL DEFAULT 0
+    version INTEGER NOT NULL DEFAULT 0,
+    CONSTRAINT fk_badge_category FOREIGN KEY (category_id) REFERENCES categories(id) ON DELETE SET NULL
 );
 
 -- Tabela Game
@@ -325,7 +327,8 @@ CREATE TABLE badges_AUD (
     revtype SMALLINT,
     name VARCHAR(255),
     description TEXT,
-    icon TEXT,
+    image_url TEXT,
+    category_id UUID,
     created_at TIMESTAMPTZ,
     updated_at TIMESTAMPTZ,
     deleted_at TIMESTAMPTZ,
