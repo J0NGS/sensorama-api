@@ -9,9 +9,9 @@ import java.util.List;
 import java.util.UUID;
 
 public class UpdateGameDTO {
-     Mode mode;
-     Status status;
-     List<GamePlayer> playerIds; // IDs dos jogadores
-     LocalDateTime startTime;
-     LocalDateTime endTime;
+     public Mode mode;
+     public Status status;
+     public List<GamePlayer> playerIds; // IDs dos jogadores
+     public LocalDateTime startTime;
+     public LocalDateTime endTime;
 }

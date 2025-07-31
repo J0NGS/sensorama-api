@@ -45,4 +45,7 @@ public interface GameRepository extends JpaRepository<Game, UUID> {
 
     @Query("SELECT g FROM Game g JOIN g.players p WHERE p.profile.id = :profileId")
     List<Game> findGamesByPlayerId(UUID profileId);
+
+    @Query("SELECT g FROM Game g WHERE g.status = :status AND g.mode = :mode AND SIZE(g.players) = 1")
+    List<Game> searchOnlineGameDisponible(Status status, Mode mode);
 }
