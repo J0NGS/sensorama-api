@@ -7,13 +7,15 @@ import br.com.starter.domain.game.Status;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 @RequiredArgsConstructor
 @Component
  // se esse UseCase for para achar partida online, pode remover pois o createGameOnline já faz isso
-public class GetGameByModeAndStatusUseCase {
+public class GetGameByStatusAndModeUseCase {
     private final GameService gameService;
 
-    public Game execute(Mode mode, Status status) {
-        return gameService.findByModeAndStatus(mode, status);
+    public List<Game> execute(Status status, Mode mode) {
+        return gameService.findByStatusAndMode(status, mode);
     }
 }

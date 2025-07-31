@@ -1,10 +1,7 @@
 package br.com.starter.application.api.game;
 
 
-import br.com.starter.application.api.category.dto.CategoryRegistrationRequest;
-import br.com.starter.application.api.category.dto.UpdateCategoryDTO;
 import br.com.starter.application.api.common.ResponseDTO;
-import br.com.starter.application.api.game.dto.GameRegistrationRequest;
 import br.com.starter.application.api.game.dto.UpdateGameDTO;
 import br.com.starter.application.useCase.game.*;
 import br.com.starter.domain.game.Mode;
@@ -31,13 +28,21 @@ public class GameController {
     private final GetGameByPlayerIdUseCase getGameByPlayerIdUseCase;
     private final GetGameByModeUseCase getGameByModeUseCase;
     private final GetGameByStatusUseCase getGameByStatusUseCase;
-    private final GetGameByModeAndStatusUseCase getGameByModeAndStatusUseCase;
+    private final GetGameByStatusAndModeUseCase getGameByStatusAndModeUseCase;
     private final GetGameBetweenUseCase getGameBetweenUseCase;
 
     private final CreateGameUseCase createGameUseCase;
+    private final CreateGameOnlineUseCase createGameOnlineUseCase;
     private final UpdateGameUseCase updateGameUseCase;
     private final DeleteGameUseCase deleteGameUseCase;
 
+    private final CountAllGamesUseCase countAllGamesUseCase;
+    private final ExistGameByIdUseCase existGameByIdUseCase;
+    private final CountGamesByStatusUseCase countGamesByStatusUseCase;
+    private final GetAllOrderbyStartTimeDescUseCase getAllOrderbyStartTimeDescUseCase;
+    private final GetAllGamesListUseCase getAllGamesListUseCase;
+    private final SwitchTurnUseCase switchTurnUseCase;
+    private final EndGameUseGame endGameUseGame;
 
     //index
     @GetMapping
@@ -95,7 +100,7 @@ public class GameController {
     @GetMapping("/Status/Mode")
     public ResponseEntity<?> findGameByModeAndStatus(@AuthenticationPrincipal CustomUserDetails userAuthentication,
                                               @RequestBody  Status status, Mode mode  ) {
-        ResponseDTO<?> response = new ResponseDTO<>(getGameByModeAndStatusUseCase.execute(mode, status));
+        ResponseDTO<?> response = new ResponseDTO<>(getGameByStatusAndModeUseCase.execute(status, mode));
         return ResponseEntity.ok(response);
     }
 
@@ -107,11 +112,19 @@ public class GameController {
         return ResponseEntity.ok(response);
     }
 
-    //create
-    @PostMapping
-    public ResponseEntity<?> register(@AuthenticationPrincipal CustomUserDetails userAuthentication,
-                                      @RequestBody GameRegistrationRequest game) {
-        ResponseDTO<?> response = new ResponseDTO<>(createGameUseCase.execute(game));
+    //create ofline game
+    @PostMapping("/{profileId}")
+    public ResponseEntity<?> createoOflineGame(@AuthenticationPrincipal CustomUserDetails userAuthentication,
+                                      @PathVariable("profileId") UUID profileId) {
+        ResponseDTO<?> response = new ResponseDTO<>(createGameUseCase.execute(profileId));
+        return ResponseEntity.ok(response);
+    }
+
+    //create online game
+    @PostMapping("online/{profileId}")
+    public ResponseEntity<?> createOnlineGame(@AuthenticationPrincipal CustomUserDetails userAuthentication,
+                                      @PathVariable("profileId") UUID profileId) {
+        ResponseDTO<?> response = new ResponseDTO<>(createGameOnlineUseCase.execute(profileId));
         return ResponseEntity.ok(response);
     }
 
@@ -126,8 +139,58 @@ public class GameController {
     //delete
     @DeleteMapping("/{gameId}")
     public ResponseEntity<?> delete(@AuthenticationPrincipal CustomUserDetails userAuthentication,
-                                             @PathVariable UUID gameId) {
+                                    @PathVariable("gameId") UUID gameId) {
         ResponseDTO<?> response = new ResponseDTO<>(deleteGameUseCase.execute(gameId));
+        return ResponseEntity.ok(response);
+    }
+
+    @GetMapping("/Count")
+    public ResponseEntity<?> countAllGames(@AuthenticationPrincipal CustomUserDetails userAuthentication
+                                             ) {
+        ResponseDTO<?> response = new ResponseDTO<>(countAllGamesUseCase.execute());
+        return ResponseEntity.ok(response);
+    }
+
+    @GetMapping("/Exist/{gameId}")
+    public ResponseEntity<?> exist(@AuthenticationPrincipal CustomUserDetails userAuthentication,
+                                   @PathVariable("gameId") UUID gameId
+    ) {
+        ResponseDTO<?> response = new ResponseDTO<>(existGameByIdUseCase.execute(gameId));
+        return ResponseEntity.ok(response);
+    }
+
+    @GetMapping("/Status/Count")
+    public ResponseEntity<?> countGamesByStatus(@AuthenticationPrincipal CustomUserDetails userAuthentication,
+                                              @RequestBody Status status) {
+        ResponseDTO<?> response = new ResponseDTO<>(countGamesByStatusUseCase.execute(status));
+        return ResponseEntity.ok(response);
+    }
+
+    @GetMapping("/List/Desc")
+    public ResponseEntity<?> listDesc(@AuthenticationPrincipal CustomUserDetails userAuthentication
+                                               ) {
+        ResponseDTO<?> response = new ResponseDTO<>(getAllOrderbyStartTimeDescUseCase.execute());
+        return ResponseEntity.ok(response);
+    }
+
+    @GetMapping("/List")
+    public ResponseEntity<?> list(@AuthenticationPrincipal CustomUserDetails userAuthentication
+    ) {
+        ResponseDTO<?> response = new ResponseDTO<>(getAllGamesListUseCase.execute());
+        return ResponseEntity.ok(response);
+    }
+
+    //create ofline game
+    @PutMapping("/switchTurn/{gameId}")
+    public ResponseEntity<?> switchTurn(@AuthenticationPrincipal CustomUserDetails userAuthentication,
+                                               @PathVariable("gameId") UUID gameId) {
+        ResponseDTO<?> response = new ResponseDTO<>(switchTurnUseCase.execute(gameId));
+        return ResponseEntity.ok(response);
+    }
+    @PutMapping("/endGame/{gameId}")
+    public ResponseEntity<?> endGame(@AuthenticationPrincipal CustomUserDetails userAuthentication,
+                                        @PathVariable("gameId") UUID gameId) {
+        ResponseDTO<?> response = new ResponseDTO<>(endGameUseGame.execute(gameId));
         return ResponseEntity.ok(response);
     }
 }

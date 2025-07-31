@@ -10,11 +10,10 @@ import java.util.List;
 
 @RequiredArgsConstructor
 @Component
-// é necessário? acho que só se for ter um histórico e servir como filtro
-public class GetGameByModeUseCase {
+public class GetAllOrderbyStartTimeDescUseCase {
     private final GameService gameService;
-    public List<Game> execute(Mode mode) {
-        return gameService.findByMode(mode);
-    }
 
+    public List<Game> execute() {
+        return gameService.findAllOrderByStartTimeDesc();
+    }
 }

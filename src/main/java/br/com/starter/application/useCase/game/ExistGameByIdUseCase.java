@@ -1,20 +1,17 @@
 package br.com.starter.application.useCase.game;
 
-import br.com.starter.domain.game.Game;
 import br.com.starter.domain.game.GameService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
-import java.time.LocalDateTime;
-import java.util.List;
+import java.util.UUID;
 
 @RequiredArgsConstructor
 @Component
-public class GetGameBetweenUseCase {
+public class ExistGameByIdUseCase {
     private final GameService gameService;
 
-    public List<Game> execute(LocalDateTime start, LocalDateTime end) {
-        return gameService.findByStartTimeBetween(start,end);
+    public boolean execute(UUID gameId) {
+        return gameService.existsById(gameId);
     }
-
 }
