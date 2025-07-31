@@ -12,10 +12,13 @@ import java.util.UUID;
 public class DeleteBadgeUseCase {
     private final BadgeService badgeService;
 
-    public boolean execute(UUID badgeId) {
-        if (badgeService.deleteBadgeById(badgeId)) {
-            return true;
+    public void execute(UUID badgeId) {
+        try {
+            badgeService.deleteBadgeById(badgeId);
+        } catch (FrontDisplayableException e) {
+            throw e;
+        } catch (Exception e) {
+            throw new FrontDisplayableException(HttpStatus.NOT_MODIFIED, "Não foi possível deletá-lo.");
         }
-        throw new FrontDisplayableException(HttpStatus.NOT_MODIFIED, "Não foi possível deletá-lo.");
     }
 }

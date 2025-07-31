@@ -21,24 +21,37 @@ public class BadgeService {
 
     public Badge createBadge(Badge badge) {
         if (badge.getCategory() != null && badge.getCategory().getId() != null) {
-            throw new FrontDisplayableException(HttpStatus.BAD_REQUEST, "Categoria não pode ser nula");
+            Category category = categoryService.findCategoryById(badge.getCategory().getId());
+            badge.setCategory(category);
+        }
+        return badgeRepository.save(badge);
+    }
+
+    public Badge updateBadge(Badge badge) {
+        if (!badgeRepository.existsById(badge.getId())) {
+            throw new FrontDisplayableException(HttpStatus.NOT_FOUND, "Badge não encontrado");
         }
         return badgeRepository.save(badge);
     }
 
     public Badge updateBadge(UUID badgeId, UpdateBadgeDTO updateBadgeDTO) {
         Badge badge = findBadgeById(badgeId);
-        if(updateBadgeDTO.getName() != null || updateBadgeDTO.getDescription() != null
-            || updateBadgeDTO.getImageUrl() != null || updateBadgeDTO.getCategoryId() != null) {
-            throw new FrontDisplayableException(HttpStatus.BAD_REQUEST, "Campo para atualização foi fornecido como nulo");
-        } else {
+
+        if (updateBadgeDTO.getName() != null) {
             badge.setName(updateBadgeDTO.getName());
+        }
+        if (updateBadgeDTO.getDescription() != null) {
             badge.setDescription(updateBadgeDTO.getDescription());
+        }
+        if (updateBadgeDTO.getImageUrl() != null) {
+            badge.setImageUrl(updateBadgeDTO.getImageUrl());
+        }
+        if (updateBadgeDTO.getCategoryId() != null) {
             Category category = categoryService.findCategoryById(updateBadgeDTO.getCategoryId());
             badge.setCategory(category);
-            badge.setImageUrl(updateBadgeDTO.getImageUrl());
-            return badgeRepository.save(badge);
         }
+
+        return badgeRepository.save(badge);
     }
 
     public Badge findBadgeById(UUID id) {
@@ -78,16 +91,11 @@ public class BadgeService {
         return badgeRepository.findAllOrderByNameAsc();
     }
 
-    public boolean deleteBadgeById(UUID id) {
+    public void deleteBadgeById(UUID id) {
         if (!badgeRepository.existsById(id)) {
             throw new FrontDisplayableException(HttpStatus.NOT_FOUND, "Badge não encontrado");
         }
-        try {
-            badgeRepository.deleteById(id);
-            return true;
-        } catch (Exception e) {
-            throw new FrontDisplayableException(HttpStatus.INTERNAL_SERVER_ERROR, "Erro ao deletar badge");
-        }
+        badgeRepository.deleteById(id);
     }
 
     public boolean existsById(UUID id) {
