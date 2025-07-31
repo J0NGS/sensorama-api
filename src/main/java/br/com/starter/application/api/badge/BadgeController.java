@@ -28,6 +28,10 @@ public class BadgeController {
     private final UpdateBadgeUseCase updateBadgeUseCase;
     private final DeleteBadgeUseCase deleteBadgeUseCase;
 
+    private final CountAllBadgesUseCase countAllBadgesUseCase;
+    private final GetBadgesByDescriptionUseCase getBadgesByDescriptionUseCase;
+    private final GetBadgesByNameUseCase getBadgesByNameUseCase;
+
     //index
     @GetMapping
     public ResponseEntity<?> getAllBadges(Pageable pageable) {
@@ -75,4 +79,27 @@ public class BadgeController {
         return ResponseEntity.ok(response);
     }
 
+    //count
+    @GetMapping("/count")
+    public ResponseEntity<?> count(@AuthenticationPrincipal CustomUserDetails userAuthentication
+                                          ) {
+        ResponseDTO<?> response = new ResponseDTO<>(countAllBadgesUseCase.execute());
+        return ResponseEntity.ok(response);
+    }
+
+    //findBy description
+    @GetMapping("/Description")
+    public ResponseEntity<?> findBadgeByDescription(@AuthenticationPrincipal CustomUserDetails userAuthentication,
+                                           @RequestBody String description) {
+        ResponseDTO<?> response = new ResponseDTO<>(getBadgesByDescriptionUseCase.execute(description));
+        return ResponseEntity.ok(response);
+    }
+
+    //findByID
+    @GetMapping("/Name")
+    public ResponseEntity<?> findBadgeByName(@AuthenticationPrincipal CustomUserDetails userAuthentication,
+                                           @RequestBody String name) {
+        ResponseDTO<?> response = new ResponseDTO<>(getBadgesByNameUseCase.execute(name));
+        return ResponseEntity.ok(response);
+    }
 }
