@@ -12,6 +12,8 @@ import org.springframework.stereotype.Component;
 // Refatorar, create game no service é para criar uma partida offline
 // tem a função createGameOnline, que busca uma partida online e caso não exista, cria uma
 // todas a lógicas para iniciar a partida estão no service, de uma olhada
+
+
 public class CreateGameUseCase {
     private final GameService gameService;
 
