@@ -1,9 +1,13 @@
 package br.com.starter.application.useCase.question;
 
 import br.com.starter.domain.question.Question;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Component;
 
 import java.util.UUID;
 
+@RequiredArgsConstructor
+@Component
 public class GetQuestionByIdUseCase {
     private final QuestionService questionService;
 
