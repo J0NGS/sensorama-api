@@ -35,7 +35,7 @@ public class BadgeController {
         return ResponseEntity.ok(response);
     }
 
-    //findBy
+    //findByID
     @GetMapping("/{badgeId}")
     public ResponseEntity<?> findBadgeById(@AuthenticationPrincipal CustomUserDetails userAuthentication,
                                               @PathVariable("badgeId") UUID badgeId) {
@@ -43,11 +43,11 @@ public class BadgeController {
         return ResponseEntity.ok(response);
     }
 
-    //findByName
-    @GetMapping("/find_by_category_id")
+    //find by categoryId
+    @GetMapping("/Category/{categoryId}")
     public ResponseEntity<?> getBadgeByCategoryId(@AuthenticationPrincipal CustomUserDetails userAuthentication,
-                                               @RequestBody UUID badgeId) {
-        ResponseDTO<?> response = new ResponseDTO<>(getBadgeByCategoryIdUseCase.execute(badgeId));
+                                                  @PathVariable("categoryId") UUID categoryId) {
+        ResponseDTO<?> response = new ResponseDTO<>(getBadgeByCategoryIdUseCase.execute(categoryId));
         return ResponseEntity.ok(response);
     }
 
