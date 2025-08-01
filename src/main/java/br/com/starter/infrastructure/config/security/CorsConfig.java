@@ -11,7 +11,7 @@ import java.util.List;
 @Configuration
 public class CorsConfig {
     protected static final String[] ALLOWED_ORIGINS = {
-        "http://localhost:3000",
+        "http://localhost:8081",
     };
 
     @Bean

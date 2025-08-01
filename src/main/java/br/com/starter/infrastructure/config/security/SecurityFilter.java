@@ -55,6 +55,13 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
                     .requestMatchers(HttpMethod.POST, BASE_URL + "/question").hasRole(RoleType.ROLE_ADMIN.getName())
                     .requestMatchers(HttpMethod.GET, BASE_URL + "/question").hasRole(RoleType.ROLE_ADMIN.getName())
                     .requestMatchers(HttpMethod.GET, BASE_URL + "/question/Title").hasRole(RoleType.ROLE_ADMIN.getName())
+                    // -------------------------------------------- profile routes --------------------------------------------
+                    .requestMatchers(HttpMethod.GET, BASE_URL + "/profiles/me").hasRole(RoleType.ROLE_USER.getName())
+                    .requestMatchers(HttpMethod.GET, BASE_URL + "/profiles/{profileId}").hasRole(RoleType.ROLE_USER.getName())
+                    .requestMatchers(HttpMethod.PUT, BASE_URL + "/profiles/me").hasRole(RoleType.ROLE_USER.getName())
+                    .requestMatchers(HttpMethod.PUT, BASE_URL + "/profiles/{profileId}").hasRole(RoleType.ROLE_ADMIN.getName())
+                    .requestMatchers(HttpMethod.PATCH, BASE_URL + "/profiles/{profileId}/update-name").hasRole(RoleType.ROLE_ADMIN.getName())
+                    .requestMatchers(HttpMethod.PATCH, BASE_URL + "/profiles/update-name").hasRole(RoleType.ROLE_USER.getName())
                     .anyRequest().denyAll()
                 )
                 .sessionManagement(sessionManagement -> sessionManagement
