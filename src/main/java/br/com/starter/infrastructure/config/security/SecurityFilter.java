@@ -52,8 +52,9 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
                     // -------------------------------------------- question routes --------------------------------------------
                     .requestMatchers(HttpMethod.GET, BASE_URL + "/question/{questionId}").hasRole(RoleType.ROLE_USER.getName())
                     .requestMatchers(HttpMethod.GET, BASE_URL + "/question/Category/{categoryId}").hasRole(RoleType.ROLE_USER.getName())
-                    .requestMatchers(HttpMethod.GET, BASE_URL + "/question/Title").hasRole(RoleType.ROLE_USER.getName())
-                    .requestMatchers(BASE_URL + "/question/**").hasRole(RoleType.ROLE_ADMIN.getName())
+                    .requestMatchers(HttpMethod.POST, BASE_URL + "/question").hasRole(RoleType.ROLE_ADMIN.getName())
+                    .requestMatchers(HttpMethod.GET, BASE_URL + "/question").hasRole(RoleType.ROLE_ADMIN.getName())
+                    .requestMatchers(HttpMethod.GET, BASE_URL + "/question/Title").hasRole(RoleType.ROLE_ADMIN.getName())
                     .anyRequest().denyAll()
                 )
                 .sessionManagement(sessionManagement -> sessionManagement
