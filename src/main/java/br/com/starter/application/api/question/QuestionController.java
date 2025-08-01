@@ -38,7 +38,7 @@ public class QuestionController {
     }
 
     @GetMapping("/{questionId}")
-    public ResponseEntity<?> findCategoryById(@AuthenticationPrincipal CustomUserDetails userAuthentication,
+    public ResponseEntity<?> findQuestionById(@AuthenticationPrincipal CustomUserDetails userAuthentication,
                                               @PathVariable("questionId") UUID questionId) {
         ResponseDTO<?> response = new ResponseDTO<>(getQuestionByIdUseCase.execute(questionId));
         return ResponseEntity.ok(response);

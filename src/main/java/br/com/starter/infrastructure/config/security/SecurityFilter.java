@@ -29,8 +29,9 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
                 .cors(cors -> cors.configurationSource(CorsConfig.corsConfigurationSource()))
                 .authorizeHttpRequests(authorize -> authorize
                     .requestMatchers("/error").anonymous()
+                    // -------------------------------------------- Public routes --------------------------------------------
+                    .requestMatchers(BASE_URL + "/public/**").permitAll()
                     // -------------------------------------------- Users routes --------------------------------------------
-                    .requestMatchers(HttpMethod.POST, BASE_URL + "/public/users/register").permitAll()
                     .requestMatchers(BASE_URL + "/users/{userId}/update-password").hasRole(RoleType.ROLE_ADMIN.getName())
                     .requestMatchers(BASE_URL + "/users/{userId}/update-username").hasRole(RoleType.ROLE_ADMIN.getName())
                     .requestMatchers(HttpMethod.PUT ,BASE_URL + "/users/{userId}").hasRole(RoleType.ROLE_ADMIN.getName())
@@ -48,6 +49,11 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
                     .requestMatchers(HttpMethod.PATCH, BASE_URL + "/privileges/{id}/signature-revoked").hasRole(RoleType.ROLE_ADMIN.getName())
                     .requestMatchers(HttpMethod.DELETE, BASE_URL + "/privileges/{id}").hasRole(RoleType.ROLE_ADMIN.getName())
                     .requestMatchers(HttpMethod.GET, BASE_URL + "/privileges").hasRole(RoleType.ROLE_USER.getName())
+                    // -------------------------------------------- question routes --------------------------------------------
+                    .requestMatchers(HttpMethod.GET, BASE_URL + "/question/{questionId}").hasRole(RoleType.ROLE_USER.getName())
+                    .requestMatchers(HttpMethod.GET, BASE_URL + "/question/Category/{categoryId}").hasRole(RoleType.ROLE_USER.getName())
+                    .requestMatchers(HttpMethod.GET, BASE_URL + "/question/Title").hasRole(RoleType.ROLE_USER.getName())
+                    .requestMatchers(BASE_URL + "/question/**").hasRole(RoleType.ROLE_ADMIN.getName())
                     .anyRequest().denyAll()
                 )
                 .sessionManagement(sessionManagement -> sessionManagement

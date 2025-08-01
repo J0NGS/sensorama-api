@@ -241,6 +241,16 @@ CREATE TABLE revinfo (
 );
 
 -- Tabelas de auditoria para entidades auditadas
+CREATE TABLE addresses_AUD (
+    id UUID NOT NULL,
+    rev INTEGER NOT NULL,
+    revtype SMALLINT,
+    country VARCHAR(20),
+    city VARCHAR(100),
+    state VARCHAR(100),
+    PRIMARY KEY (id, rev)
+);
+
 CREATE TABLE auths_AUD (
     id UUID NOT NULL,
     rev INTEGER NOT NULL,

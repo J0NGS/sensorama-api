@@ -49,7 +49,7 @@ public class CategoryController {
 
     //create
     @PostMapping
-    public ResponseEntity<?> register(@AuthenticationPrincipal CustomUserDetails userAuthentication,
+    public ResponseEntity<?> createCategory(@AuthenticationPrincipal CustomUserDetails userAuthentication,
                                       @RequestBody CategoryRegistrationRequest category) {
         ResponseDTO<?> response = new ResponseDTO<>(createCategoryUseCase.execute(category));
         return ResponseEntity.ok(response);
