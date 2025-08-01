@@ -13,9 +13,6 @@ public class CreateBadgeUseCase {
     private final BadgeService badgeService;
 
     public Badge execute(BadgeRegistrationRequest request) {
-
-
-
         Badge badge = new Badge();
         badge.setName(request.name());
         badge.setDescription(request.description());
