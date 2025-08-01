@@ -40,7 +40,7 @@ public class CategoryController {
     }
 
     //findByName
-    @GetMapping("/Name")
+    @PostMapping("/Name")
     public ResponseEntity<?> getCategoryByName(@AuthenticationPrincipal CustomUserDetails userAuthentication,
                                                 @RequestBody String category) {
         ResponseDTO<?> response = new ResponseDTO<>(getCategoryByNameUseCase.execute(category));
