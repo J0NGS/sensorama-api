@@ -2,6 +2,7 @@ package br.com.starter.application.useCase.gamePlayer;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
+import br.com.starter.domain.gamePlayer.GamePlayerService;
 
 import java.util.UUID;
 

@@ -7,6 +7,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
+import br.com.starter.domain.leaderboard.LeaderboardService;
 
 @Component
 @RequiredArgsConstructor

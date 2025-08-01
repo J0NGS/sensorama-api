@@ -44,7 +44,7 @@ public class LeaderBoardEntryController {
     }
 
     //score
-    @PostMapping("/total")
+    @PostMapping("/score")
     public ResponseEntity<?> findByScore(@AuthenticationPrincipal CustomUserDetails userAuthentication,
                                               @RequestBody Integer minScore) {
         ResponseDTO<?> response = new ResponseDTO<>(getLeaderBoardEntryByScoreUseCase.execute(minScore));

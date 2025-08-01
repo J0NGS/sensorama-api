@@ -3,6 +3,7 @@ package br.com.starter.application.useCase.leaderBoard;
 import br.com.starter.domain.category.Category;
 import br.com.starter.domain.category.CategoryService;
 import br.com.starter.domain.leaderboard.Leaderboard;
+import br.com.starter.domain.leaderboard.LeaderboardService;
 import br.com.starter.domain.leaderboard.LeaderboardType;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;

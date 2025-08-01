@@ -4,6 +4,8 @@ import br.com.starter.domain.leaderboard.Leaderboard;
 import br.com.starter.domain.leaderboard.LeaderboardEntry;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
+import br.com.starter.domain.leaderboard.LeaderboardEntryService;
+
 
 import java.time.LocalDateTime;
 import java.util.List;

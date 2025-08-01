@@ -30,7 +30,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
                 .authorizeHttpRequests(authorize -> authorize
                     .requestMatchers("/error").anonymous()
                     // -------------------------------------------- Users routes --------------------------------------------
-                    .requestMatchers(BASE_URL + "/users/register").hasRole(RoleType.ROLE_ADMIN.getName())
+                    .requestMatchers(HttpMethod.POST, BASE_URL + "/public/users/register").permitAll()
                     .requestMatchers(BASE_URL + "/users/{userId}/update-password").hasRole(RoleType.ROLE_ADMIN.getName())
                     .requestMatchers(BASE_URL + "/users/{userId}/update-username").hasRole(RoleType.ROLE_ADMIN.getName())
                     .requestMatchers(HttpMethod.PUT ,BASE_URL + "/users/{userId}").hasRole(RoleType.ROLE_ADMIN.getName())
@@ -48,9 +48,9 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
                     .requestMatchers(HttpMethod.PATCH, BASE_URL + "/privileges/{id}/signature-revoked").hasRole(RoleType.ROLE_ADMIN.getName())
                     .requestMatchers(HttpMethod.DELETE, BASE_URL + "/privileges/{id}").hasRole(RoleType.ROLE_ADMIN.getName())
                     .requestMatchers(HttpMethod.GET, BASE_URL + "/privileges").hasRole(RoleType.ROLE_USER.getName())
-                    .requestMatchers(BASE_URL + "/public/**").permitAll()
-                    .anyRequest().denyAll())
-                    .sessionManagement(sessionManagement -> sessionManagement
+                    .anyRequest().denyAll()
+                )
+                .sessionManagement(sessionManagement -> sessionManagement
                     .sessionCreationPolicy(SessionCreationPolicy.STATELESS));
             http.addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
             return http.build();

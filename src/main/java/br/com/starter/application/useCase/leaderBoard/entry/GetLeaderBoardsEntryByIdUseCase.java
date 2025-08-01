@@ -1,6 +1,7 @@
 package br.com.starter.application.useCase.leaderBoard.entry;
 
 import br.com.starter.domain.leaderboard.LeaderboardEntry;
+import br.com.starter.domain.leaderboard.LeaderboardEntryService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
