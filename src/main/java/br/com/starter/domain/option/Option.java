@@ -1,4 +1,4 @@
-package br.com.starter.domain.Options;
+package br.com.starter.domain.option;
 
 import br.com.starter.domain.common.Auditable;
 import br.com.starter.domain.question.Question;
@@ -14,7 +14,7 @@ import java.util.UUID;
 @Getter
 @Setter
 @Table(name = "options")
-public class Options extends Auditable {
+public class Option extends Auditable {
     @Id
     private UUID id = UUID.randomUUID();
     @ManyToOne

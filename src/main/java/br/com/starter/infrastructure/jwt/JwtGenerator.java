@@ -8,20 +8,18 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Component;
-import org.springframework.web.server.ResponseStatusException;
 
 import br.com.starter.domain.user.CustomUserDetails;
 import br.com.starter.domain.user.UserStatus;
 import br.com.starter.infrastructure.exceptions.FrontDisplayableException;
 import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
 
 @Component
 public class JwtGenerator {
 
     @Value("${api.security.token.secret}")
-    private String SECRET_KEY;
+    private String secretKey;
 
     static final long EXPIRATION_TIME = (1000 * 60 * 60 * 10); // 10 horas
 
@@ -38,7 +36,7 @@ public class JwtGenerator {
             throw new FrontDisplayableException(HttpStatus.FORBIDDEN, "Usuário inativo");
         }
 
-        Key key = Keys.hmacShaKeyFor(SECRET_KEY.getBytes());
+        Key key = Keys.hmacShaKeyFor(secretKey.getBytes());
 
         return Jwts.builder()
                 .setSubject(user.getAuth().getUsername())

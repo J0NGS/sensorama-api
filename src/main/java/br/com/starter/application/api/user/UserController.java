@@ -57,25 +57,6 @@ public class UserController {
         return ResponseEntity.ok(response);
     }
 
-    @PatchMapping("/{userId}/privileges/{privilegeId}/add")
-    public ResponseEntity<?> addPrivilegeToUser(@PathVariable UUID userId, @PathVariable UUID privilegeId) {
-        ResponseDTO<?> response = new ResponseDTO<>(addPrivilegesToUserUseCase.execute(userId, privilegeId));
-        return ResponseEntity.ok(response);
-    }
-
-    @PatchMapping("/{userId}/privileges/{privilegeId}/remove")
-    public ResponseEntity<?> removePrivilegeFromUser(@PathVariable UUID userId, @PathVariable UUID privilegeId) {
-        ResponseDTO<?> response = new ResponseDTO<>(removePrivilegesToUserUseCase.execute(userId, privilegeId));
-        return ResponseEntity.ok(response);
-    }
-
-
-    @PatchMapping("/{userId}/update-role/{roleId}")
-    public ResponseEntity<?> updateRoleForUser(@PathVariable UUID userId, @PathVariable UUID roleId) {
-        ResponseDTO<?> response = new ResponseDTO<>(changeUserRoleUseCase.execute(userId, roleId));
-        return ResponseEntity.ok(response);
-    }
-
     @DeleteMapping("/{userId}")
     public ResponseEntity<?> deleteUser(@PathVariable UUID userId) {
         ResponseDTO<?> response = new ResponseDTO<>(deleteUserUseCase.execute(userId));

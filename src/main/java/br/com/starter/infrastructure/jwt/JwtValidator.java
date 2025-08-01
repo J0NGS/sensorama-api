@@ -9,17 +9,21 @@ import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.security.Keys;
+
+import java.security.Key;
 
 @Component
 public class JwtValidator {
 
     @Value("${api.security.token.secret}")
-    private String SECRET_KEY;
+    private String secretKey;
 
     public Claims validateTokenAndGetClaims(String token) {
         try {
+            Key key = Keys.hmacShaKeyFor(secretKey.getBytes());
             return Jwts.parserBuilder()
-                    .setSigningKey(SECRET_KEY)
+                    .setSigningKey(key)
                     .build()
                     .parseClaimsJws(token)
                     .getBody();

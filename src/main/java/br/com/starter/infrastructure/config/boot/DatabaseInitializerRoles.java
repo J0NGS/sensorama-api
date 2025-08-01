@@ -21,7 +21,7 @@ public class DatabaseInitializerRoles {
     @Order(1)
     public CommandLineRunner initializeRoles(RoleRepository roleRepository, RoleService roleService) {
         return args -> {
-            List<String> defaultRoles = List.of("ROLE_DEV", "ROLE_ADMIN", "ROLE_BEEKEEPER", "ROLE_USER");
+            List<String> defaultRoles = List.of("ROLE_DEV", "ROLE_ADMIN", "ROLE_USER");
 
             for (String roleName : defaultRoles) {
                 if (!roleRepository.existsByName(roleName)) {

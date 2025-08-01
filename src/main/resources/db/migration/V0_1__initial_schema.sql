@@ -62,13 +62,15 @@ CREATE TABLE users (
     auth_id UUID,
     profile_id UUID,
     role_id UUID,
+    address_id UUID,
     created_at TIMESTAMPTZ NOT NULL,
     updated_at TIMESTAMPTZ,
     deleted_at TIMESTAMPTZ,
     version INTEGER NOT NULL DEFAULT 0,
     CONSTRAINT fk_auth FOREIGN KEY (auth_id) REFERENCES auths(id) ON DELETE CASCADE,
     CONSTRAINT fk_profile FOREIGN KEY (profile_id) REFERENCES profiles(id) ON DELETE SET NULL,
-    CONSTRAINT fk_role FOREIGN KEY (role_id) REFERENCES roles(id) ON DELETE SET NULL
+    CONSTRAINT fk_role FOREIGN KEY (role_id) REFERENCES roles(id) ON DELETE SET NULL,
+    CONSTRAINT fk_user_address FOREIGN KEY (address_id) REFERENCES addresses(id) ON DELETE SET NULL
 );
 
 -- Tabela de relacionamento entre Role e Privilege
@@ -106,11 +108,13 @@ CREATE TABLE badges (
     id UUID PRIMARY KEY NOT NULL,
     name VARCHAR(255) NOT NULL,
     description TEXT,
-    icon TEXT,
+    image_url TEXT,
+    category_id UUID,
     created_at TIMESTAMPTZ NOT NULL,
     updated_at TIMESTAMPTZ,
     deleted_at TIMESTAMPTZ,
-    version INTEGER NOT NULL DEFAULT 0
+    version INTEGER NOT NULL DEFAULT 0,
+    CONSTRAINT fk_badge_category FOREIGN KEY (category_id) REFERENCES categories(id) ON DELETE SET NULL
 );
 
 -- Tabela Game
@@ -237,6 +241,16 @@ CREATE TABLE revinfo (
 );
 
 -- Tabelas de auditoria para entidades auditadas
+CREATE TABLE addresses_AUD (
+    id UUID NOT NULL,
+    rev INTEGER NOT NULL,
+    revtype SMALLINT,
+    country VARCHAR(20),
+    city VARCHAR(100),
+    state VARCHAR(100),
+    PRIMARY KEY (id, rev)
+);
+
 CREATE TABLE auths_AUD (
     id UUID NOT NULL,
     rev INTEGER NOT NULL,
@@ -299,6 +313,7 @@ CREATE TABLE users_AUD (
     auth_id UUID,
     profile_id UUID,
     role_id UUID,
+    address_id UUID,
     created_at TIMESTAMPTZ,
     updated_at TIMESTAMPTZ,
     deleted_at TIMESTAMPTZ,
@@ -325,7 +340,8 @@ CREATE TABLE badges_AUD (
     revtype SMALLINT,
     name VARCHAR(255),
     description TEXT,
-    icon TEXT,
+    image_url TEXT,
+    category_id UUID,
     created_at TIMESTAMPTZ,
     updated_at TIMESTAMPTZ,
     deleted_at TIMESTAMPTZ,
